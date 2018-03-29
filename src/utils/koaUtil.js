@@ -1,6 +1,7 @@
 /**
  * Created by pure on 2018/3/20.
  */
+import Http from 'http';
 import Koa from 'koa';
 import Compose from 'koa-compose';
 import Logger from 'koa-logger';
@@ -25,9 +26,16 @@ const all = Compose([
 
 app.use(all);
 
-function init() {
-  return new Promise(($resolve, $reject) => {
-    app.listen(port, () => {
+async function init() {
+  await new Promise(($resolve) => {
+
+    const server = Http.createServer(app.callback());
+    server.on('error', $err => {
+      logger.error($err.message);
+      process.exit(0);
+    });
+
+    server.listen(port, () => {
       logger.info(`Server started on ${port}`);
       $resolve();
     });
