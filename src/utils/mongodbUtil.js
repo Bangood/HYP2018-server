@@ -3,9 +3,8 @@
  */
 import Mongoose from 'mongoose';
 import logger from './loggerUtil';
-import config from '../configs';
+import { mongodbConf } from '../configs';
 
-const mongodbConf = config.mongodb;
 const mongoUri = `mongodb://${mongodbConf.user}:${mongodbConf.password}@${mongodbConf.host}:${mongodbConf.port}/${mongodbConf.database}`;
 
 async function init() {

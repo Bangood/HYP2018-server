@@ -9,7 +9,7 @@ import Helmet from 'koa-helmet';
 import BodyParser from 'koa-bodyparser';
 import Cors from '@koa/cors';
 import router from '../routes';
-import config from '../configs';
+import { port } from '../configs';
 import logger from './loggerUtil';
 
 const app = new Koa();
@@ -27,8 +27,8 @@ app.use(all);
 
 function init() {
   return new Promise(($resolve, $reject) => {
-    app.listen(config.port, () => {
-      logger.info(`Server started on ${config.port}`);
+    app.listen(port, () => {
+      logger.info(`Server started on ${port}`);
       $resolve();
     });
   });
