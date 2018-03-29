@@ -22,16 +22,17 @@ async function pageNotFound($ctx) {
       $ctx.body = 'Page Not Found';
   }
 }
+
 /**
  * 检测是否登录
  */
 async function isLogin($ctx, $next) {
-  if(!$ctx.state.currentUser) {
-   return $ctx.error('您还未登录，请登录后重试!',{
-     jump: '/user/login'
-   });
+  if (!$ctx.state.currentUser) {
+    return $ctx.error('您还未登录，请登录后重试!', {
+      jump: '/user/login'
+    });
   }
   await $next();
 }
 
-export default {pageNotFound};
+export default { pageNotFound };

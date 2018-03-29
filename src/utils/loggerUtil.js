@@ -5,6 +5,7 @@ import fs from 'fs';
 import winston from 'winston';
 import moment from 'moment';
 import DailyRotateFile from 'winston-daily-rotate-file';
+
 const dateFormat = () => moment().format('YYYY-MM-DD HH:mm:ss:sss');
 
 //开发阶段使用的logger
@@ -84,4 +85,5 @@ if (fs.existsSync('log')) {
   logger.dbLogger.add(allLoggerTransport, {}, true);
   logger.dbLogger.add(errorTransport, {}, true);
 }
+
 export default logger;

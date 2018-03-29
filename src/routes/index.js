@@ -6,7 +6,9 @@ import primitive from './primitive';
 import woman from './woman';
 
 const router = new Router();
+
 router.prefix('/v1');
 router.use('/primitive', primitive);
-router.use('/woman',woman);
+router.use('/woman', woman);
+
 export default router;

@@ -54,12 +54,14 @@ async function create($ctx) {
   let result = await entity.save();
 
   if (result) {
-    $ctx.ok({error: null, data: null});
+    $ctx.ok({ error: null, data: null });
   } else {
-    $ctx.ok({error: '出错了', data: null});
+    $ctx.ok({ error: '出错了', data: null });
   }
 }
+
 async function list($ctx) {
 
 }
-export {create, list};
+
+export { create, list };

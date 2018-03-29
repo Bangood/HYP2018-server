@@ -5,7 +5,7 @@ import Mongoose from 'mongoose';
 import Int32 from 'mongoose-int32';
 
 const WomenSchema = new Mongoose.Schema({
-// 姓名
+  // 姓名
   name: String,
   // 人物照片数据库索引
   dbIndex: Int32,
@@ -84,7 +84,8 @@ const WomenSchema = new Mongoose.Schema({
   // 第一次内射时间
   vaginaFirstTime: {
     type: String,
-    required:true
+    required: true
   }
 });
+
 export default Mongoose.model('women', WomenSchema, 'woman');
