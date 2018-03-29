@@ -5,17 +5,21 @@ import Mongoose from 'mongoose';
 import logger from './loggerUtil';
 import config from '../configs';
 
-const mongoUri = `mongodb://${config.mongodb.user}:${config.mongodb.password}@${config.mongodb.host}:${config.mongodb.port}/${config.mongodb.database}`;
+const mongodbConf = config.mongodb;
+const mongoUri = `mongodb://${mongodbConf.user}:${mongodbConf.password}@${mongodbConf.host}:${mongodbConf.port}/${mongodbConf.database}`;
 
 async function init() {
-  return new Promise(($resolve, $reject) => {
-    Mongoose.connect(mongoUri);
-    Mongoose.connection.on('error', () => {
-      throw new Error(`unable to connect to database: ${mongoUri}`);
-    });
-    Mongoose.connection.on('connected', () => {
-      logger.info(`Connect to database: mongodb://${config.mongodb.host}:${config.mongodb.port}/${config.mongodb.database}`);
-      $resolve();
+  return new Promise(($resolve) => {
+    Mongoose.connection
+      .on('close', () => logger.warn('Mongodb connection closed.'))
+      .on('open', () => {
+        logger.info(`Connected to database: mongodb://${mongodbConf.host}:${mongodbConf.port}/${mongodbConf.database}`);
+        $resolve();
+      });
+
+    Mongoose.connect(mongoUri).catch($err => {
+      logger.warn(`Unable to connect to mongodb: ${$err.message}`);
+      process.exit(0);
     });
   });
 }
