@@ -4,11 +4,13 @@
 import Router from 'koa-router';
 import primitive from './primitive';
 import woman from './woman';
+import user from './user';
 
 const router = new Router();
 
 router.prefix('/v1');
 router.use('/primitive', primitive);
 router.use('/woman', woman);
+router.use('/user', user);
 
 export default router;

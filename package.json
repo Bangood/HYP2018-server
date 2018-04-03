@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Bangood/HYP2018-server#readme",
   "dependencies": {
     "@koa/cors": "^2.2.1",
+    "bcrypt-as-promised": "^1.1.0",
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0",
     "koa-compose": "^4.0.0",
@@ -29,6 +30,7 @@
     "moment": "^2.21.0",
     "mongoose": "^5.0.11",
     "mongoose-int32": "^0.2.0",
+    "mongoose-validator": "^2.0.2",
     "winston": "^2.4.1",
     "winston-daily-rotate-file": "^3.0.1"
   },
