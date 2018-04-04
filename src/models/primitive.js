@@ -30,6 +30,8 @@ const PrimitiveSchema = new Mongoose.Schema({
   selected: Boolean,
   // 照片数量
   imgNum: Int32
-});
+}, {
+    versionKey: false
+  });
 
 export default Mongoose.model('Primitive', PrimitiveSchema, 'primitive');

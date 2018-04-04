@@ -86,6 +86,8 @@ const WomenSchema = new Mongoose.Schema({
     type: String,
     required: true
   }
-});
+}, {
+    versionKey: false
+  });
 
 export default Mongoose.model('women', WomenSchema, 'woman');
