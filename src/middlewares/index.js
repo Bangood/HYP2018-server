@@ -1,7 +1,7 @@
 /**
  * Created by pure on 2018/3/20.
  */
-
+import queryPretty from './queryPretty';
 /**
  * 404
  */
@@ -35,4 +35,4 @@ async function isLogin($ctx, $next) {
   await $next();
 }
 
-export default { pageNotFound };
+export { pageNotFound, queryPretty };

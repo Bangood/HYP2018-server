@@ -13,6 +13,7 @@ import Cors from '@koa/cors';
 import router from '../routes';
 import { port } from '../configs';
 import logger from './loggerUtil';
+import { queryPretty } from '../middlewares';
 
 const app = new Koa();
 // composed middleware
@@ -20,6 +21,7 @@ const all = Compose([
   Helmet(),
   Logger(),
   Respond(),
+  queryPretty(),
   BodyParser(),
   Cors(),
   Jwt({ secret: '5201314' }).unless({ path: [/^\/v1\/user\/login/, /^\/v1\/user\/regist/] }),
