@@ -3,7 +3,9 @@
  */
 import Mongoose from 'mongoose';
 import Validate from 'mongoose-validator';
-import Bcrypt from 'bcrypt-as-promised';
+import Bcrypt from 'bcrypt';
+
+const saltRounds = 10;
 
 const UserSchema = new Mongoose.Schema({
   name: {
@@ -67,11 +69,25 @@ UserSchema.pre('save', async function ($next) {
     return $next();
   }
   try {
-    this.hashed_password = await Bcrypt.hash(this.password);
+    const salt = await Bcrypt.genSalt(saltRounds);
+    this.hashed_password = await Bcrypt.hash(this.password, salt);
     $next();
   } catch ($err) {
     $next($err);
   }
 });
+
+UserSchema.methods.comparePassword = async function ($password) {
+  const isMatch = await Bcrypt.compare($password, this.hashed_password)
+    .catch(() => false);
+  return isMatch;
+};
+
+UserSchema.statics.findByName = async function ($email) {
+  const user = await this.findOne({
+    email: $email
+  });
+  return user;
+};
 
 export default Mongoose.model('user', UserSchema, 'user');

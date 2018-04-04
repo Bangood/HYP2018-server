@@ -5,6 +5,7 @@ import Http from 'http';
 import Koa from 'koa';
 import Compose from 'koa-compose';
 import Logger from 'koa-logger';
+import Jwt from 'koa-jwt';
 import Respond from 'koa-respond';
 import Helmet from 'koa-helmet';
 import BodyParser from 'koa-bodyparser';
@@ -21,6 +22,7 @@ const all = Compose([
   Respond(),
   BodyParser(),
   Cors(),
+  Jwt({ secret: '5201314' }).unless({ path: [/^\/v1\/user\/login/, /^\/v1\/user\/regist/] }),
   router.routes()
 ]);
 

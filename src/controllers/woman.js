@@ -2,7 +2,6 @@
  * Created by pure on 2018/3/27.
  */
 import Model from '../models/woman';
-import logger from '../utils/loggerUtil';
 
 async function create($ctx) {
   let {
@@ -60,8 +59,4 @@ async function create($ctx) {
   }
 }
 
-async function list($ctx) {
-
-}
-
-export { create, list };
+export { create };

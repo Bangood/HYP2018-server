@@ -1,4 +1,5 @@
 import Model from '../models/user';
+import Jwt from 'jsonwebtoken';
 
 async function create($ctx) {
     const { email, password, confirmPassword, fullName } = $ctx.request.body;
@@ -38,4 +39,30 @@ async function update($ctx) {
         $ctx.ok({ error: $err.message });
     }
 }
-export { create, findById, update };
+
+async function login($ctx) {
+    const { email, password } = $ctx.request.body;
+    try {
+        const user = await Model.findByName(email);
+        if (!user) {
+            return $ctx.ok({ error: '该用户不存在' });
+        }
+        const isMatch = await user.comparePassword(password);
+        if (!isMatch) {
+            return $ctx.ok({ error: '用户名或密码错误' });
+        }
+        const token = genToken(user);
+        $ctx.ok({ data: { token: token } });
+    } catch ($err) {
+        $ctx.ok({ error: $err.message });
+    }
+}
+
+function genToken($user) {
+    const token = Jwt.sign({
+        id: $user._id
+    }, '5201314', { expiresIn: 3600 });
+    return token;
+}
+
+export { create, findById, update, login };
