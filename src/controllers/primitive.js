@@ -5,7 +5,7 @@ import Model from '../models/primitive';
 import logger from '../utils/loggerUtil';
 
 async function list($ctx) {
-  let entities = await Model.find().sort({ createAt: -1 }).exec();
+  let entities = await Model.find($ctx.query).sort({ _id: 1 }).exec();
   $ctx.ok({ error: null, data: entities });
 }
 function create($ctx) {
@@ -18,7 +18,7 @@ function create($ctx) {
     selected,
     imgNum
   });
-  
+
   return entity.save().then(() => {
     $ctx.ok({ error: null, data: null });
   }).catch(($err) => {
