@@ -27,8 +27,6 @@ function create($ctx) {
   });
 }
 async function update($ctx) {
-  console.log($ctx.request.body);
-  console.log($ctx.params.id)
   try {
     const entity = await Model.findByIdAndUpdate($ctx.params.id, $ctx.request.body, {
       new: true,

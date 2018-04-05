@@ -7,17 +7,25 @@ import Int32 from 'mongoose-int32';
 const WomenSchema = new Mongoose.Schema({
   // 姓名
   name: String,
-  // 人物照片数据库索引
-  dbIndex: {
-    type: Int32,
-    unique: true
+  // 原型
+  primitive: {
+    type: String,
+    unique: true,
+    ref: 'Primitive'
   },
   // 年龄
   age: Int32,
-  // 原型
-  primitive: String,
   // 身高
   stature: Int32,
+  /*
+   *和白羽当前状态
+   *1-陌生
+   *2-熟悉
+   *3-暧昧
+   *4-敌对
+   *5-收服
+   */
+  status: Int32,
   /*
    *职业
    * 1-老师
@@ -37,26 +45,13 @@ const WomenSchema = new Mongoose.Schema({
   // 地址
   address: String,
   /*
-   *人物类型
+   *人物当前类型
    * 1-幼女
    * 2-少女
    * 3-少妇
    * 4-熟妇
    */
   type: Int32,
-  /*
-   *人种
-   * 0-未知
-   * 1-白色人种
-   * 2-黄种人种
-   * 3-黑种人种
-   * 4-棕种人种
-   * 5-混血人种
-   */
-  race: Int32,
-  // 照片数量
-  imgNum: Int32,
-
   /*
    *与白羽关系
    * 1-母子
