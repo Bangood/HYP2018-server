@@ -8,7 +8,10 @@ const WomenSchema = new Mongoose.Schema({
   // 姓名
   name: String,
   // 人物照片数据库索引
-  dbIndex: Int32,
+  dbIndex: {
+    type: Int32,
+    unique: true
+  },
   // 年龄
   age: Int32,
   // 原型
@@ -82,10 +85,7 @@ const WomenSchema = new Mongoose.Schema({
   // 口交次数
   oralSexCount: Int32,
   // 第一次内射时间
-  vaginaFirstTime: {
-    type: String,
-    required: true
-  }
+  vaginaFirstTime: String
 }, {
     versionKey: false
   });

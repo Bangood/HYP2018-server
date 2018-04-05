@@ -50,13 +50,17 @@ async function create($ctx) {
     oralSexCount,
     vaginaFirstTime
   });
-  let result = await entity.save();
-
-  if (result) {
-    $ctx.ok({ error: null, data: null });
-  } else {
-    $ctx.ok({ error: '出错了', data: null });
+  try {
+    let result = await entity.save();
+    $ctx.ok({ error: null });
+  } catch ($err) {
+    $ctx.ok({ error: $err.message });
   }
 }
 
-export { create };
+async function list($ctx) {
+  let entities = await Model.find($ctx.query).sort({ _id: 1 }).exec();
+  $ctx.ok({ error: null, data: entities });
+}
+
+export { create, list };
