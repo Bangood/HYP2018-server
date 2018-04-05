@@ -33,10 +33,8 @@ const parseValue = (value) => {
 export default ({ override = true } = {}) => async (ctx, next) => {
     const query = ctx.query;
     const result = {};
-    console.log(query)
     // Transform
     Object.keys(query).filter(n => n).forEach((key) => {
-        console.log(key);
         const value = query[key];
         result[key] = Array.isArray(value) ? value.map(n => parseValue(n)) : parseValue(value);
         if (result[key] === undefined || result[key] === null || result[key] === '') {

@@ -5,7 +5,7 @@ import Mongoose from 'mongoose';
 import Int32 from 'mongoose-int32';
 
 const PrimitiveSchema = new Mongoose.Schema({
-  _id: Int32,
+  _id: String,
   name: String,
   /*
    *人种

@@ -26,5 +26,17 @@ function create($ctx) {
     $ctx.ok({ error: $err.message, data: null });
   });
 }
-
-export { list, create };
+async function update($ctx) {
+  console.log($ctx.request.body);
+  console.log($ctx.params.id)
+  try {
+    const entity = await Model.findByIdAndUpdate($ctx.params.id, $ctx.request.body, {
+      new: true,
+      runValidators: true
+    });
+    $ctx.ok({ data: entity });
+  } catch ($err) {
+    $ctx.ok({ error: $err.message });
+  }
+}
+export { list, create, update };
