@@ -61,7 +61,7 @@ async function login($ctx) {
 function genToken($user) {
     const token = Jwt.sign({
         id: $user._id
-    }, '5201314', { expiresIn: 3600 });
+    }, '5201314', { expiresIn: 60 * 60 * 24 });
     return token;
 }
 
